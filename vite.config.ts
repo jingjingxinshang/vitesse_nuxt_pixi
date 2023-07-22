@@ -19,6 +19,15 @@ import VueMacros from 'unplugin-vue-macros/vite'
 import WebfontDownload from 'vite-plugin-webfont-dl'
 
 export default defineConfig({
+  server: {
+    proxy: {
+      '/api': {
+        target: 'http://prd.duolaapp.zijinshe.com/',
+        changeOrigin: true,
+        rewrite: path => path.replace(/^\/api/, ''),
+      },
+    },
+  },
   resolve: {
     alias: {
       '~/': `${path.resolve(__dirname, 'src')}/`,
